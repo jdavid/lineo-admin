@@ -1,0 +1,22 @@
+{% load django_vite %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="{% static 'vendor/flowbite-3.1.2.min.js' %}" defer></script>
+    <script src="{% static 'vendor/htmx-2.0.4.min.js' %}" defer></script>
+
+    {% vite_hmr_client %}
+    {% vite_asset 'src/main.js' %}
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+
+    {% block main %}
+    {% endblock %}
+
+</body>
+</html>
