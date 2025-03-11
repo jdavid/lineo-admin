@@ -1,23 +1,29 @@
 from django.forms.boundfield import BoundField
+from django.forms.utils import ErrorList
 from django import template
+from django.template.loader import render_to_string
 
 
 register = template.Library()
 
+@register.simple_tag
+def tw(obj, placeholder=''):
+    if type(obj) is ErrorList:
+        template = 'lineo_admin/error_list.html'
+        context = {'errors': obj}
+    elif type(obj) is BoundField:
+        assert obj.use_fieldset is False
+        #breakpoint()
+        #.widget.attrs
+        #.legend
+        #.css_classes
+        #.data
+        #.errors
+        #.help_text
+        #.is_hidden
+        template = 'lineo_admin/field.html'
+        context = {'field': obj, 'placeholder': placeholder}
+    else:
+        raise TypeError(f'Unexpected {type(obj)}')
 
-@register.inclusion_tag('lineo_admin/field.html')
-def tw(field, placeholder=''):
-    if type(field) is not BoundField:
-        raise TypeError(f'Unexpected {type(field)}')
-
-    assert field.use_fieldset is False
-    #breakpoint()
-    #.widget.attrs
-    #.legend
-    #.css_classes
-    #.data
-    #.errors
-    #.help_text
-    #.is_hidden
-
-    return {'field': field, 'placeholder': placeholder}
+    return render_to_string(template, context)

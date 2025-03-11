@@ -1,0 +1,19 @@
+{% load django_vite %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% vite_hmr_client %}
+    {% vite_asset 'src/admin.js' %}
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+
+    {% block main %}
+    {% endblock %}
+
+</body>
+</html>

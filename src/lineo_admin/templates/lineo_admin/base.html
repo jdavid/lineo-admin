@@ -18,8 +18,10 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900">
 
-    {% block main %}
-    {% endblock %}
+<div class="flex flex-row">
+    <div>{% include 'lineo_admin/sidebar.html' %}</div>
+    <div class="p-5">{% block main %}{% endblock %}</div>
+</div>
 
 </body>
 </html>
