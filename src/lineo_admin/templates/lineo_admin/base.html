@@ -7,16 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% comment %}
-    <script src="https://unpkg.com/@tailwindcss/browser@4.0.9/dist/index.global.js"></script>
-    <script src="{% static 'vendor/flowbite-3.1.2.min.js' %}" defer></script>
     <script src="{% static 'vendor/htmx-2.0.4.min.js' %}" defer></script>
-    {% endcomment %}
 
     {% vite_hmr_client %}
     {% vite_asset 'src/admin.js' %}
 </head>
-<body class="bg-gray-50 dark:bg-gray-900">
+<body class="bg-gray-50 dark:bg-gray-900" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
 <div class="flex flex-row">
     <div>{% include 'lineo_admin/sidebar.html' %}</div>

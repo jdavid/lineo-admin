@@ -7,6 +7,7 @@ app_name = 'lineo-admin'
 
 urlpatterns = [
     ('login/', views.Login, 'login'),
+    ('logout/', views.Logout, 'logout'),
     ('profile/', views.Profile, 'profile'),
 ]
 
