@@ -6,6 +6,7 @@ from . import views
 app_name = 'lineo-admin'
 
 urlpatterns = [
+    ('', views.Root, 'root'),
     ('login/', views.Login, 'login'),
     ('logout/', views.Logout, 'logout'),
     ('profile/', views.Profile, 'profile'),
