@@ -1,0 +1,28 @@
+{% extends 'lineo_admin/base.html' %}
+{% load get %}
+
+{% block main %}
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                {% for column in view.columns %}
+                <th scope="col" class="px-6 py-3">{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+                           border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    {% for column in view.columns %}
+                    <td class="px-6 py-4">{% get obj column %}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

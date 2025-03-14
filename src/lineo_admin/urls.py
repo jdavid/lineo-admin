@@ -10,6 +10,7 @@ urlpatterns = [
     ('login/', views.Login, 'login'),
     ('logout/', views.Logout, 'logout'),
     ('profile/', views.Profile, 'profile'),
+    ('users/', views.UserList, 'user-list'),
 ]
 
 urlpatterns = [

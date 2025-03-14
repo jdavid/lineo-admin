@@ -1,9 +1,12 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from django.views import generic
 from django_htmx import http as htmx
 
+
+User = get_user_model()
 
 class Root(generic.RedirectView):
     url = reverse_lazy('lineo-admin:profile')
@@ -21,3 +24,11 @@ class Logout(LoginRequiredMixin, auth_views.LogoutView):
 
 class Profile(LoginRequiredMixin, generic.TemplateView):
     template_name = 'lineo_admin/profile.html'
+
+class UserList(LoginRequiredMixin, generic.ListView):
+    model = User
+    template_name = 'lineo_admin/list.html'
+
+    columns = [
+        'username', 'first_name', 'last_name',
+    ]
