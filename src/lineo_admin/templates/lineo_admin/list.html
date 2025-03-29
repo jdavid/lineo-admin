@@ -10,6 +10,7 @@
                 {% for column in view.columns %}
                 <th scope="col" class="px-6 py-3">{{ column }}</th>
                 {% endfor %}
+                <th scope="col" class="px-6 py-3"></th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,13 @@
                     {% for column in view.columns %}
                     <td class="px-6 py-4">{% get obj column %}</td>
                     {% endfor %}
+                    <td class="px-6 py-4">
+                        {% for action in view.actions %}
+                            {% url action.viewname obj.pk as href %}
+                            {% include "lineo_admin/includes/drawer-button.html"
+                               with href=href icon=action.icon title=action.title %}
+                        {% endfor %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

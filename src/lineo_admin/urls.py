@@ -11,6 +11,7 @@ urlpatterns = [
     ('logout/', views.Logout, 'logout'),
     ('profile/', views.Profile, 'profile'),
     ('users/', views.UserList, 'user-list'),
+    ('users/<int:pk>/edit/', views.UserEdit, 'user-edit'),
 ]
 
 urlpatterns = [

@@ -7,7 +7,7 @@ authors = [
     { name = "J. David Ibáñez", email = "jdavid.ibp@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = ["django-cotton", "django-htmx"]
+dependencies = ["django-cotton", "django-formset", "django-htmx"]
 
 [build-system]
 requires = ["hatchling"]

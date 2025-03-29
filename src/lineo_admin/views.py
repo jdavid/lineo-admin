@@ -1,9 +1,15 @@
+# Django
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from django.views import generic
+
 from django_htmx import http as htmx
+from formset.views import FormViewMixin
+
+# Lineo
+from . import forms
 
 
 User = get_user_model()
@@ -32,3 +38,12 @@ class UserList(LoginRequiredMixin, generic.ListView):
     columns = [
         'username', 'first_name', 'last_name',
     ]
+
+    actions = [
+        {'icon': 'icons/edit.svg', 'title': 'Edit', 'viewname': 'lineo-admin:user-edit'},
+    ]
+
+class UserEdit(LoginRequiredMixin, FormViewMixin, generic.UpdateView):
+    form_class = forms.UserForm
+    model = User
+    template_name = 'lineo_admin/edit.html'
