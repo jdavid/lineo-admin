@@ -31,7 +31,20 @@ class Logout(LoginRequiredMixin, auth_views.LogoutView):
 class Profile(LoginRequiredMixin, generic.TemplateView):
     template_name = 'lineo_admin/profile.html'
 
-class UserList(LoginRequiredMixin, generic.ListView):
+
+class BaseListView(LoginRequiredMixin, generic.ListView):
+
+    def get_columns(self):
+        fields = []
+
+        model = self.model
+        for column in self.columns:
+            field = model._meta.get_field(column)
+            fields.append(field)
+
+        return fields
+
+class UserList(BaseListView):
     model = User
     template_name = 'lineo_admin/list.html'
 
