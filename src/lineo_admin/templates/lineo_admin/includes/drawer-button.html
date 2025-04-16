@@ -1,10 +1,10 @@
 {% if viewname %}{% url viewname as href %}{% endif %}
-<button type="button" title="{{ title }}"
+<button type="button" title="{{ title }}" class="inline-flex"
         hx-get="{{ href }}" hx-target="#drawer-right-content"
         data-drawer-target="drawer-right"
         data-drawer-show="drawer-right"
         data-drawer-placement="right"
         aria-controls="drawer-right"
 >
-    {% include icon %}
+    {% include icon %} {{ label }}
 </button>

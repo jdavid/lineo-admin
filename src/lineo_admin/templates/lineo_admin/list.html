@@ -1,7 +1,13 @@
 {% extends 'lineo_admin/base.html' %}
+{% load i18n %}
 {% load get %}
 
 {% block main %}
+
+<div class="flex justify-end mb-1">
+    {% url 'lineo-admin:user-create' as href %}
+    {% include "lineo_admin/includes/drawer-button.html" with href=href icon="icons/plus.svg" label="Add" %}
+</div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

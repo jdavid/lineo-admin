@@ -53,10 +53,21 @@ class UserList(BaseListView):
     ]
 
     actions = [
-        {'icon': 'icons/edit.svg', 'title': 'Edit', 'viewname': 'lineo-admin:user-edit'},
+        {'icon': 'icons/edit.svg', 'title': 'Edit', 'viewname': 'lineo-admin:user-update'},
+        {'icon': 'icons/delete.svg', 'title': 'Delete', 'viewname': 'lineo-admin:user-delete'},
     ]
 
-class UserEdit(LoginRequiredMixin, FormViewMixin, generic.UpdateView):
+class UserCreate(LoginRequiredMixin, FormViewMixin, generic.CreateView):
+    form_class = forms.UserForm
+    model = User
+    template_name = 'lineo_admin/edit.html'
+
+class UserUpdate(LoginRequiredMixin, FormViewMixin, generic.UpdateView):
+    form_class = forms.UserForm
+    model = User
+    template_name = 'lineo_admin/edit.html'
+
+class UserDelete(LoginRequiredMixin, FormViewMixin, generic.DeleteView):
     form_class = forms.UserForm
     model = User
     template_name = 'lineo_admin/edit.html'
