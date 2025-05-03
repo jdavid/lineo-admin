@@ -68,6 +68,5 @@ class UserUpdate(LoginRequiredMixin, FormViewMixin, generic.UpdateView):
     template_name = 'lineo_admin/edit.html'
 
 class UserDelete(LoginRequiredMixin, FormViewMixin, generic.DeleteView):
-    form_class = forms.UserForm
     model = User
-    template_name = 'lineo_admin/edit.html'
+    template_name = 'lineo_admin/delete.html'
