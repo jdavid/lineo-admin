@@ -9,7 +9,8 @@ from django_htmx import http as htmx
 from formset.views import FormViewMixin
 
 # Lineo
-from . import forms, mixins
+from .access import AccessMixin
+from . import forms
 
 
 User = get_user_model()
@@ -53,24 +54,24 @@ class UserList(BaseListView):
     ]
 
     actions = [
-        {'icon': 'icons/edit.svg', 'title': 'Edit', 'viewname': 'lineo-admin:user-update'},
         {'icon': 'icons/delete.svg', 'title': 'Delete', 'viewname': 'lineo-admin:user-delete'},
+        {'icon': 'icons/edit.svg', 'title': 'Edit', 'viewname': 'lineo-admin:user-update'},
     ]
 
-class UserCreate(LoginRequiredMixin, FormViewMixin, generic.CreateView):
+
+class UserCreate(AccessMixin, FormViewMixin, generic.CreateView):
+    access_verb = 'create_user'
     form_class = forms.UserForm
     model = User
     template_name = 'lineo_admin/edit.html'
 
-class UserUpdate(LoginRequiredMixin, FormViewMixin, generic.UpdateView):
+class UserUpdate(AccessMixin, FormViewMixin, generic.UpdateView):
+    access_verb = 'update_user'
     form_class = forms.UserForm
     model = User
     template_name = 'lineo_admin/edit.html'
 
-class UserDelete(LoginRequiredMixin, mixins.AccessMixin, FormViewMixin, generic.DeleteView):
+class UserDelete(AccessMixin, FormViewMixin, generic.DeleteView):
+    access_verb = 'delete_user'
     model = User
     template_name = 'lineo_admin/delete.html'
-
-    @classmethod
-    def test_func(self, user, obj=None):
-        return user.id != obj.id
