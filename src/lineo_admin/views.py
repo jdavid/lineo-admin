@@ -9,7 +9,7 @@ from django_htmx import http as htmx
 from formset.views import FormViewMixin
 
 # Lineo
-from . import forms
+from . import forms, mixins
 
 
 User = get_user_model()
@@ -67,6 +67,10 @@ class UserUpdate(LoginRequiredMixin, FormViewMixin, generic.UpdateView):
     model = User
     template_name = 'lineo_admin/edit.html'
 
-class UserDelete(LoginRequiredMixin, FormViewMixin, generic.DeleteView):
+class UserDelete(LoginRequiredMixin, mixins.AccessMixin, FormViewMixin, generic.DeleteView):
     model = User
     template_name = 'lineo_admin/delete.html'
+
+    @classmethod
+    def test_func(self, user, obj=None):
+        return user.id != obj.id
