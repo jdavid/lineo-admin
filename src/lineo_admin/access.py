@@ -27,6 +27,10 @@ class Access:
     def can_update_user(cls, user, obj):
         return user.is_superuser
 
+    @classmethod
+    def can_update_profile(cls, user, obj):
+        return user.id == obj.id
+
 
 access = Access()
 

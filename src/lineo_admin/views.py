@@ -75,3 +75,12 @@ class UserDelete(AccessMixin, FormViewMixin, generic.DeleteView):
     access_verb = 'delete_user'
     model = User
     template_name = 'lineo_admin/delete.html'
+
+class UserProfile(AccessMixin, FormViewMixin, generic.UpdateView):
+    access_verb = 'update_profile'
+    form_class = forms.UserForm
+    model = User
+    template_name = 'lineo_admin/edit.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
