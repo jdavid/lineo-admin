@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib.auth import mixins
 
 
 class Access:
@@ -35,7 +35,7 @@ class Access:
 access = Access()
 
 
-class AccessMixin(auth.mixins.AccessMixin):
+class AccessMixin(mixins.AccessMixin):
 
     access_verb = None
 
