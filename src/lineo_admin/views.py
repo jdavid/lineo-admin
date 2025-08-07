@@ -1,5 +1,3 @@
-from pathlib import Path
-
 # Django
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,24 +13,12 @@ from .access import AccessMixin
 from . import forms
 
 
-class BSTWMixin:
-
-    def get_template_names(self):
-        tw = self.request.GET.get('tw')
-        if tw is not None:
-            root, rest = self.template_name.split('/', 1)
-            template_name = Path(root) / 'tw' / rest
-            return [str(template_name)]
-
-        return [self.template_name]
-
-
 User = get_user_model()
 
 class Root(generic.RedirectView):
     url = reverse_lazy('lineo-admin:profile')
 
-class Login(BSTWMixin, auth_views.LoginView):
+class Login(auth_views.LoginView):
     template_name = 'lineo_admin/anon/login.html'
     next_page = 'lineo-admin:profile'
 
@@ -43,7 +29,7 @@ class Logout(LoginRequiredMixin, auth_views.LogoutView):
         response = super().post(request, *args, **kwargs)
         return htmx.retarget(response, 'body')
 
-class Profile(BSTWMixin, LoginRequiredMixin, generic.TemplateView):
+class Profile(LoginRequiredMixin, generic.TemplateView):
     template_name = 'lineo_admin/profile.html'
 
 
