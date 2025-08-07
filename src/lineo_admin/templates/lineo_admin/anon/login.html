@@ -1,0 +1,14 @@
+{% extends 'lineo_admin/anon/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block main %}
+  <h3 class="mb-5">Sign in to your account</h3>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='floating' %}
+    {% bootstrap_button button_type="submit" content="Sign in" extra_classes="float-end" %}
+  </form>
+
+  <a href="#">Forgot password?</a>
+
+{% endblock %}

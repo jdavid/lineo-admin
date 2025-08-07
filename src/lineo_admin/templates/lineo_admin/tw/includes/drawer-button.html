@@ -1,16 +1,14 @@
 {% if viewname %}{% url viewname as href %}{% endif %}
-
 <button
-  type="button"
-  title="{{ title }}"
-  class="btn d-inline-flex"
+  type="button" title="{{ title }}" class="inline-flex"
   hx-get="{{ href }}"
   hx-target="#drawer-right-content"
   hx-indicator="#spinner"
   hx-on::before-request="clearContent('drawer-right-content')"
   hx-on::response-error="event.detail.target.innerHTML = event.detail.xhr.response"
-  data-bs-toggle="offcanvas"
-  data-bs-target="#drawer-right"
+  data-drawer-target="drawer-right"
+  data-drawer-show="drawer-right"
+  data-drawer-placement="right"
   aria-controls="drawer-right"
 >
     {% include icon %} {{ label }}

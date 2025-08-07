@@ -1,0 +1,8 @@
+{% if viewname %}{% url viewname as href %}{% endif %}
+<li class="nav-item">
+  <a href="{{ href }}" {% if method == 'post' %}hx-post="{{ href }}"{% endif %}
+     class="nav-link link-body-emphasis px-1 tw:flex tw:items-center tw:hover:bg-gray-100">
+    <span class="tw:text-gray-400">{% include icon %}</span>
+    <span class="ms-2">{{ title }}</span>
+  </a>
+</li>

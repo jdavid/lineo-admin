@@ -1,3 +1,5 @@
+from pathlib import Path
+
 # Django
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,23 +15,35 @@ from .access import AccessMixin
 from . import forms
 
 
+class BSTWMixin:
+
+    def get_template_names(self):
+        tw = self.request.GET.get('tw')
+        if tw is not None:
+            root, rest = self.template_name.split('/', 1)
+            template_name = Path(root) / 'tw' / rest
+            return [str(template_name)]
+
+        return [self.template_name]
+
+
 User = get_user_model()
 
 class Root(generic.RedirectView):
     url = reverse_lazy('lineo-admin:profile')
 
-class Login(auth_views.LoginView):
-    template_name = 'lineo_admin/login.html'
+class Login(BSTWMixin, auth_views.LoginView):
+    template_name = 'lineo_admin/anon/login.html'
     next_page = 'lineo-admin:profile'
 
 class Logout(LoginRequiredMixin, auth_views.LogoutView):
-    template_name = 'lineo_admin/logout.html'
+    template_name = 'lineo_admin/anon/logout.html'
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         return htmx.retarget(response, 'body')
 
-class Profile(LoginRequiredMixin, generic.TemplateView):
+class Profile(BSTWMixin, LoginRequiredMixin, generic.TemplateView):
     template_name = 'lineo_admin/profile.html'
 
 
@@ -64,6 +78,9 @@ class UserCreate(AccessMixin, FormViewMixin, generic.CreateView):
     form_class = forms.UserForm
     model = User
     template_name = 'lineo_admin/edit.html'
+
+    def get_object(self):
+        return None
 
 class UserUpdate(AccessMixin, FormViewMixin, generic.UpdateView):
     access_verb = 'update_user'

@@ -1,11 +1,11 @@
-{% extends request.htmx|yesno:"lineo_admin/base_htmx.html,lineo_admin/base.html" %}
+{% extends request.htmx|yesno:"lineo_admin/htmx/base.html,lineo_admin/base.html" %}
 
 {% load render_form from formsetify %}
 
 {% block main %}
 <django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
-  {% render_form form "tailwind" field_classes="mb-2" %}
-  <button type="button" class="formset-button-default" df-click="submit -> reload">
+  {% render_form form "bootstrap" field_classes="mb-2" %}
+  <button type="button" class="btn btn-primary" df-click="submit -> reload">
     Submit
   </button>
 </django-formset>

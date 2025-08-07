@@ -3,8 +3,8 @@
 <p class="mb-2">Are you sure you want to delete &laquo; {{ object }} &raquo;?</p>
 
 <django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
-  {% render_form form "bootstrap" field_classes="mb-2" %}
-  <button type="button" class="btn btn-danger" df-click="submit -> reload">
+  {% render_form form "tailwind" field_classes="mb-2" %}
+  <button type="button" class="formset-button-default" df-click="submit -> reload">
     Confirm Delete
   </button>
 </django-formset>

@@ -1,0 +1,7 @@
+{% extends 'lineo_admin/tw/anon/base.html' %}
+{% load i18n %}
+
+{% block main %}
+    <p>{% translate "Thanks for spending some quality time with the web site today." %}</p>
+    <p><c-link href="{% url 'lineo-admin:login' %}">{% translate 'Log in again' %}</c-link></p>
+{% endblock %}
