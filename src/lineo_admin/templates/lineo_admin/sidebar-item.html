@@ -1,8 +1,9 @@
 {% if viewname %}{% url viewname as href %}{% endif %}
 <li class="nav-item">
   <a href="{{ href }}" {% if method == 'post' %}hx-post="{{ href }}"{% endif %}
-     class="nav-link link-body-emphasis px-1 tw:flex tw:items-center tw:hover:bg-gray-100">
-    <i class="fa-solid fa-{{ icon }} tw:text-gray-400"></i>
-    <span class="ms-2">{{ title }}</span>
+     class="nav-link link-body-emphasis px-2 d-flex align-items-center gap-2
+            tw:hover:bg-[var(--bs-primary)] tw:hover:text-white">
+    <i class="fa-solid fa-{{ icon }}"></i>
+    <span>{{ title }}</span>
   </a>
 </li>
