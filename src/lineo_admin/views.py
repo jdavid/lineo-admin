@@ -54,8 +54,8 @@ class UserList(BaseListView):
     ]
 
     actions = [
-        {'icon': 'icons/delete.svg', 'title': 'Delete', 'viewname': 'lineo-admin:user-delete'},
-        {'icon': 'icons/edit.svg', 'title': 'Edit', 'viewname': 'lineo-admin:user-update'},
+        {'icon': 'trash', 'title': 'Delete', 'viewname': 'lineo-admin:user-delete'},
+        {'icon': 'edit', 'title': 'Edit', 'viewname': 'lineo-admin:user-update'},
     ]
 
 

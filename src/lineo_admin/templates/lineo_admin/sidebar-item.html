@@ -2,7 +2,7 @@
 <li class="nav-item">
   <a href="{{ href }}" {% if method == 'post' %}hx-post="{{ href }}"{% endif %}
      class="nav-link link-body-emphasis px-1 tw:flex tw:items-center tw:hover:bg-gray-100">
-    <span class="tw:text-gray-400">{% include icon %}</span>
+    <i class="fa-solid fa-{{ icon }} tw:text-gray-400"></i>
     <span class="ms-2">{{ title }}</span>
   </a>
 </li>

@@ -3,7 +3,7 @@
 <button
   type="button"
   title="{{ title }}"
-  class="btn d-inline-flex"
+  class="btn d-inline-flex align-items-center gap-1"
   hx-get="{{ href }}"
   hx-target="#drawer-right-content"
   hx-indicator="#spinner"
@@ -13,5 +13,6 @@
   data-bs-target="#drawer-right"
   aria-controls="drawer-right"
 >
-    {% include icon %} {{ label }}
+    <i class="fa-solid fa-{{ icon }}"></i>
+    {{ label }}
 </button>
