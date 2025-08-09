@@ -1,13 +1,14 @@
 {% extends 'lineo_admin/anon/base.html' %}
-{% load django_bootstrap5 %}
+{% load django_bootstrap5 formsetify %}
 
 {% block main %}
+
   <h3 class="mb-5">Sign in to your account</h3>
-  <form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form layout='floating' %}
-    {% bootstrap_button button_type="submit" content="Sign in" extra_classes="float-end" %}
-  </form>
+
+  <django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
+    {% render_form form "bootstrap" field_classes="mb-3" %}
+    <button type="submit" class="btn btn-primary float-end" df-click="submit -> proceed">Sign in</button>
+  </django-formset>
 
   <a href="#">Forgot password?</a>
 

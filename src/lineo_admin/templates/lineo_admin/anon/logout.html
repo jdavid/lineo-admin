@@ -3,5 +3,5 @@
 
 {% block main %}
     <p>{% translate "Thanks for spending some quality time with the web site today." %}</p>
-    <p><a href="{{ href }}">{% translate 'Log in again' %}</a></p>
+    <p><a href="{% url 'lineo-admin:login' %}">{% translate 'Log in again' %}</a></p>
 {% endblock %}

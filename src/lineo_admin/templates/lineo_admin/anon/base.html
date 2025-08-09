@@ -6,7 +6,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="{% static 'lineo-admin.js' %}"></script>
+  <script type="module" src="{% static 'formset/js/django-formset.js' %}"></script>
+  <script defer src="{% static 'lineo-admin.js' %}"></script>
 
   {% vite_hmr_client %}
   {% vite_asset 'src/admin.js' %}

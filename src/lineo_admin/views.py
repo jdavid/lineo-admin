@@ -18,9 +18,10 @@ User = get_user_model()
 class Root(generic.RedirectView):
     url = reverse_lazy('lineo-admin:profile')
 
-class Login(auth_views.LoginView):
+class Login(FormViewMixin, auth_views.LoginView):
     template_name = 'lineo_admin/anon/login.html'
-    next_page = 'lineo-admin:profile'
+    success_url = reverse_lazy('lineo-admin:profile')
+
 
 class Logout(auth_views.LogoutView):
     http_method_names = ["post", "options", "get"]
