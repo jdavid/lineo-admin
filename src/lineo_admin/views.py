@@ -22,12 +22,15 @@ class Login(auth_views.LoginView):
     template_name = 'lineo_admin/anon/login.html'
     next_page = 'lineo-admin:profile'
 
-class Logout(LoginRequiredMixin, auth_views.LogoutView):
+class Logout(auth_views.LogoutView):
+    http_method_names = ["post", "options", "get"]
     template_name = 'lineo_admin/anon/logout.html'
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        return htmx.retarget(response, 'body')
+        if request.htmx:
+            return htmx.HttpResponseClientRedirect(request.path)
+        return response
 
 class Profile(LoginRequiredMixin, generic.TemplateView):
     template_name = 'lineo_admin/profile.html'
