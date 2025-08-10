@@ -28,8 +28,9 @@
           {% for action in view.actions %}
             {% urlaccess action.viewname obj as href %}
             {% if href %}
-              {% include "lineo_admin/includes/drawer-button.html"
-                 with href=href icon=action.icon title=action.title %}
+              {% with href=href icon=action.icon title=action.title %}
+              {% include "lineo_admin/includes/drawer-button.html" %}
+              {% endwith %}
             {% endif %}
           {% endfor %}
         </td>

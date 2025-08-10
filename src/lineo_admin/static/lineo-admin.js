@@ -7,17 +7,20 @@ function clearContent(id) {
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('django-formset').forEach(formset => {
-    formset.addEventListener('keypress', function(event) {
-      if (event.key === 'Enter' && !event.shiftKey) {
+  // Listen for keypress events on the document
+  document.addEventListener('keypress', function(event) {
+    const target = event.target;
+    if (event.key === 'Enter' && !event.shiftKey && target.tagName !== 'TEXTAREA') {
+      // Check if the event happened inside a django-formset
+      const formset = target.closest('django-formset');
+      if (formset) {
         event.preventDefault();
-        // Find the submit button and click it
         const submitButton = formset.querySelector('button[type="submit"], input[type="submit"]');
         if (submitButton) {
           submitButton.click();
         }
       }
-    });
+    }
   });
 });
 

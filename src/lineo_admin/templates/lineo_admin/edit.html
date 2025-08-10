@@ -5,8 +5,6 @@
 {% block main %}
 <django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
   {% render_form form "bootstrap" field_classes="mb-2" %}
-  <button type="button" class="btn btn-primary" df-click="submit -> reload">
-    Submit
-  </button>
+  <button type="submit" class="btn btn-primary" df-click="submit -> reload">Submit</button>
 </django-formset>
 {% endblock %}
