@@ -1,0 +1,19 @@
+{
+  "author": "J. David Ibáñez",
+  "license": "GPL-3.0",
+  "name": "lineo-admin",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.1",
+    "bootstrap": "^5.3.3",
+    "sass": "1.77.6",
+    "vite": "^7.1.0"
+  }
+}
