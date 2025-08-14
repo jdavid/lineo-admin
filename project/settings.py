@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'formset',
     'lineo_admin',
+    'lineo_pages',
 ]
 
 MIDDLEWARE = [

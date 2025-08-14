@@ -1,4 +1,9 @@
 
 install:
-	uv venv venv313
-	python manage.py migrate
+	uv venv
+	uv pip install -e .
+	uv pip install -e ./packages/lineo-pages
+	uv run python manage.py migrate
+
+run:
+	uv run python manage.py runserver

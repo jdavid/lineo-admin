@@ -10,7 +10,7 @@ requires-python = ">=3.12"
 dependencies = ["django-bootstrap5", "django-formset", "django-htmx", "django-vite", "fontawesomefree"]
 
 [tool.uv.sources]
-#lineo-pages = { workspace = true }
+lineo-pages = { workspace = true }
 
 [tool.uv.workspace]
 members = ["packages/*"]
