@@ -38,6 +38,8 @@ class Profile(LoginRequiredMixin, generic.TemplateView):
 
 
 class BaseListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'lineo_admin/list.html'
+    create_viewname = None
 
     def get_columns(self):
         fields = []
@@ -49,13 +51,18 @@ class BaseListView(LoginRequiredMixin, generic.ListView):
 
         return fields
 
+class BaseCreateView(AccessMixin, FormViewMixin, generic.CreateView):
+    template_name = 'lineo_admin/edit.html'
+
+    def get_object(self):
+        return None
+
+
 class UserList(BaseListView):
     model = User
-    template_name = 'lineo_admin/list.html'
+    create_viewname = 'lineo-admin:user-create'
 
-    columns = [
-        'username', 'first_name', 'last_name',
-    ]
+    columns = ['username', 'first_name', 'last_name']
 
     actions = [
         {'icon': 'trash', 'title': 'Delete', 'viewname': 'lineo-admin:user-delete'},
@@ -63,14 +70,10 @@ class UserList(BaseListView):
     ]
 
 
-class UserCreate(AccessMixin, FormViewMixin, generic.CreateView):
+class UserCreate(BaseCreateView):
     access_verb = 'create_user'
     form_class = forms.UserForm
     model = User
-    template_name = 'lineo_admin/edit.html'
-
-    def get_object(self):
-        return None
 
 class UserUpdate(AccessMixin, FormViewMixin, generic.UpdateView):
     access_verb = 'update_user'

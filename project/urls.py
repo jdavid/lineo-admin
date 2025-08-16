@@ -17,5 +17,6 @@ Including another URLconf
 from django.urls import include, path
 
 urlpatterns = [
+    path('admin/pages/', include('lineo_pages.urls')),
     path('admin/', include('lineo_admin.urls')),
 ]

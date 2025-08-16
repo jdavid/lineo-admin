@@ -5,8 +5,10 @@
 {% block main %}
 
 <div class="d-flex justify-content-end mb-1">
-  {% url 'lineo-admin:user-create' as href %}
-  {% include "lineo_admin/includes/drawer-button.html" with href=href icon="plus" label="Add" %}
+  {% if view.create_viewname %}
+    {% url view.create_viewname as href %}
+    {% include "lineo_admin/includes/drawer-button.html" with href=href icon="plus" label="Add" %}
+  {% endif %}
 </div>
 
 <table class="table">

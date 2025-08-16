@@ -1,15 +1,17 @@
+{% load sidebar %}
+
 <aside class="p-3 tw:h-screen tw:w-2xs tw:border-r tw:border-gray-200">
   <ul class="nav nav-pills flex-column mb-auto">
-    {% include 'lineo_admin/sidebar-item.html' with icon='users' title="Users" viewname="lineo-admin:user-list" %}
+    {% sidebar_items %}
   </ul>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-      {% with icon='circle-user' title=user viewname="lineo-admin:user-profile" %}
-      {% include 'lineo_admin/sidebar-item.html' %}
-      {% endwith %}
+    {% with icon='circle-user' title=user viewname="lineo-admin:user-profile" %}
+    {% include 'lineo_admin/sidebar-item.html' %}
+    {% endwith %}
 
-      {% with icon='right-from-bracket' title="Sign out" viewname="lineo-admin:logout" method="post" %}
-      {% include 'lineo_admin/sidebar-item.html' %}
-      {% endwith %}
+    {% with icon='right-from-bracket' title="Sign out" viewname="lineo-admin:logout" method="post" %}
+    {% include 'lineo_admin/sidebar-item.html' %}
+    {% endwith %}
   </ul>
 </aside>
