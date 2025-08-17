@@ -9,8 +9,8 @@ from django_htmx import http as htmx
 from formset.views import FormViewMixin
 
 # Lineo
-from .access import AccessMixin
-from . import forms
+from . import base, forms
+from .ui import Action
 
 
 app_name = 'lineo-admin'
@@ -39,62 +39,32 @@ class Profile(LoginRequiredMixin, generic.TemplateView):
     template_name = 'lineo_admin/profile.html'
 
 
-class BaseListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'lineo_admin/list.html'
-    create_viewname = None
-
-    def get_columns(self):
-        fields = []
-
-        model = self.model
-        for column in self.columns:
-            field = model._meta.get_field(column)
-            fields.append(field)
-
-        return fields
-
-
-class BaseCreateView(AccessMixin, FormViewMixin, generic.CreateView):
-    template_name = 'lineo_admin/edit.html'
-
-    def get_object(self):
-        return None
-
-
-class BaseUpdateView(AccessMixin, FormViewMixin, generic.UpdateView):
-    template_name = 'lineo_admin/edit.html'
-
-
-class BaseDeleteView(AccessMixin, FormViewMixin, generic.DeleteView):
-    template_name = 'lineo_admin/delete.html'
-
-
-class UserList(BaseListView):
+class UserList(base.ListView):
     model = User
     create_viewname = f'{app_name}:user-create'
 
     columns = ['username', 'first_name', 'last_name']
 
     actions = [
-        {'icon': 'trash', 'title': 'Delete', 'viewname': f'{app_name}:user-delete'},
-        {'icon': 'edit', 'title': 'Edit', 'viewname': f'{app_name}:user-update'},
+        Action(icon='trash', title='Delete', viewname=f'{app_name}:user-delete'),
+        Action(icon='edit', title='Edit', viewname=f'{app_name}:user-update'),
     ]
 
-class UserCreate(BaseCreateView):
+class UserCreate(base.CreateView):
     access_verb = f'{app_name}:create_user'
     form_class = forms.UserForm
     model = User
 
-class UserUpdate(BaseUpdateView):
+class UserUpdate(base.UpdateView):
     access_verb = f'{app_name}:update_user'
     form_class = forms.UserForm
     model = User
 
-class UserDelete(BaseDeleteView):
+class UserDelete(base.DeleteView):
     access_verb = f'{app_name}:delete_user'
     model = User
 
-class UserProfile(AccessMixin, FormViewMixin, generic.UpdateView):
+class UserProfile(base.AccessMixin, FormViewMixin, generic.UpdateView):
     access_verb = f'{app_name}:update_profile'
     form_class = forms.UserForm
     model = User

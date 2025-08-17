@@ -14,8 +14,8 @@ urlpatterns = [
     # Users
     ('users/', views.UserList, {}, 'user-list'),
     ('users/create/', views.UserCreate, {}, 'user-create'),
-    ('users/update/<int:pk>/', views.UserUpdate, {}, 'user-update'),
-    ('users/delete/<int:pk>/', views.UserDelete, {}, 'user-delete'),
+    ('users/<int:pk>/update/', views.UserUpdate, {}, 'user-update'),
+    ('users/<int:pk>/delete/', views.UserDelete, {}, 'user-delete'),
 ]
 
 urlpatterns = [

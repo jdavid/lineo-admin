@@ -9,7 +9,8 @@ urlpatterns = [
     # Pages
     ('', views.PageList, {}, 'page-list'),
     ('create/', views.PageCreate, {}, 'page-create'),
-    ('delete/<int:pk>/', views.PageDelete, {}, 'page-delete'),
+    ('<int:pk>/', views.PageRead, {}, 'page-read'),
+    ('<int:pk>/delete/', views.PageDelete, {}, 'page-delete'),
 ]
 
 urlpatterns = [

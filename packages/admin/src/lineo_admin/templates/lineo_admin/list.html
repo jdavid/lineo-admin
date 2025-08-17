@@ -30,9 +30,15 @@
           {% for action in view.actions %}
             {% urlaccess action.viewname obj as href %}
             {% if href %}
-              {% with href=href icon=action.icon title=action.title %}
-              {% include "lineo_admin/includes/drawer-button.html" %}
-              {% endwith %}
+              {% if action.drawer %}
+                {% with href=href icon=action.icon title=action.title %}
+                {% include "lineo_admin/includes/drawer-button.html" %}
+                {% endwith %}
+              {% else %}
+              <a href="{{ href }}" class="btn">
+                <i class="fa-solid fa-{{ action.icon }}"></i>
+              </a>
+              {% endif %}
             {% endif %}
           {% endfor %}
         </td>

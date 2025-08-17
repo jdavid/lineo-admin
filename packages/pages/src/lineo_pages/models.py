@@ -5,8 +5,8 @@ from polymorphic.models import PolymorphicModel
 class Page(models.Model):
     lang = models.CharField('Language', max_length=9)
     path = models.CharField(max_length=99)
-    title = models.CharField(max_length=99)
-    description = models.CharField(max_length=999)
+    title = models.CharField(max_length=99, blank=True)
+    description = models.CharField(max_length=999, blank=True)
 
 
 class Block(PolymorphicModel):

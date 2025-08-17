@@ -1,7 +1,7 @@
 from django import template
 from django.urls import resolve, reverse
 
-from lineo_admin.access import access
+from lineo_admin.registry import access
 
 
 register = template.Library()

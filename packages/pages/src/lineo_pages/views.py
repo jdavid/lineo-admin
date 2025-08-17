@@ -1,28 +1,34 @@
-from lineo_admin.views import BaseListView, BaseCreateView, BaseDeleteView
+from lineo_admin import base
+from lineo_admin.ui import Action
 
-from . import forms
-from . import models
+from . import forms, models
 
 
 app_name = 'lineo-pages'
 
-class PageList(BaseListView):
+class PageList(base.ListView):
     model = models.Page
     create_viewname = f'{app_name}:page-create'
 
     columns = ['lang', 'path', 'title']
 
     actions = [
-        {'icon': 'trash', 'title': 'Delete', 'viewname': f'{app_name}:page-delete'},
-#       {'icon': 'edit', 'title': 'Edit', 'viewname': f'{app_name}:page-update'},
+        Action(icon='circle-chevron-right', title='Read', viewname=f'{app_name}:page-read',
+               drawer=False),
+        Action(icon='trash', title='Delete', viewname=f'{app_name}:page-delete'),
     ]
 
 
-class PageCreate(BaseCreateView):
+class PageCreate(base.CreateView):
     access_verb = f'{app_name}:create_page'
     form_class = forms.PageForm
     model = models.Page
 
-class PageDelete(BaseDeleteView):
+
+class PageRead(base.ReadView):
+    access_verb = f'{app_name}:read_page'
+    model = models.Page
+
+class PageDelete(base.DeleteView):
     access_verb = f'{app_name}:delete_page'
     model = models.Page

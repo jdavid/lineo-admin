@@ -8,11 +8,15 @@ class Access:
         return user.is_superuser
 
     @classmethod
-    def delete_page(cls, user, obj):
+    def read_page(cls, user, obj):
         return user.is_superuser
 
     @classmethod
     def update_page(cls, user, obj):
+        return user.is_superuser
+
+    @classmethod
+    def delete_page(cls, user, obj):
         return user.is_superuser
 
 
