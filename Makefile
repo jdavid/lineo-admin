@@ -1,14 +1,13 @@
 
 install:
 	uv venv
-	uv pip install -e .
+	#uv pip install -e .
+	uv pip install -e ./packages/admin
 	uv pip install -e ./packages/pages
-	uv run python manage.py migrate
 	npm install
 
-update:
-	uv pip install -e .
-	uv pip install -e ./packages/lineo-pages
+migrate:
+	uv run python manage.py migrate
 
 run:
 	uv run python manage.py runserver

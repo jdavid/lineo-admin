@@ -1,25 +1,5 @@
-[project]
-name = "lineo-admin"
-version = "0.1.0"
-description = ""
-readme = "README.md"
-authors = [
-    { name = "J. David Ibáñez", email = "jdavid.ibp@gmail.com" }
-]
-license = { text = "GPL-3.0-only" }
-requires-python = ">=3.12"
-dependencies = [
-    "django-bootstrap5",
-    "django-formset",
-    "django-htmx",
-    "django-vite",
-    "fontawesomefree"
-]
-classifiers = [
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-]
-
 [tool.uv.sources]
+lineo-admin = { path = "packages/admin" }
 lineo-pages = { path = "packages/pages" }
 
 [tool.uv.workspace]
