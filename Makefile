@@ -1,10 +1,8 @@
 
 install:
-	uv venv
-	#uv pip install -e .
-	uv pip install -e ./packages/admin
-	uv pip install -e ./packages/pages
 	npm install
+	uv venv
+	uv sync
 
 createsuperuser:
 	uv run python manage.py createsuperuser
@@ -14,3 +12,6 @@ migrate:
 
 run:
 	uv run python manage.py runserver
+
+shell:
+	uv run python manage.py shell
