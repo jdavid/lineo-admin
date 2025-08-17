@@ -13,6 +13,8 @@ from .access import AccessMixin
 from . import forms
 
 
+app_name = 'lineo-admin'
+
 User = get_user_model()
 
 class Root(generic.RedirectView):
@@ -51,6 +53,7 @@ class BaseListView(LoginRequiredMixin, generic.ListView):
 
         return fields
 
+
 class BaseCreateView(AccessMixin, FormViewMixin, generic.CreateView):
     template_name = 'lineo_admin/edit.html'
 
@@ -58,36 +61,41 @@ class BaseCreateView(AccessMixin, FormViewMixin, generic.CreateView):
         return None
 
 
+class BaseUpdateView(AccessMixin, FormViewMixin, generic.UpdateView):
+    template_name = 'lineo_admin/edit.html'
+
+
+class BaseDeleteView(AccessMixin, FormViewMixin, generic.DeleteView):
+    template_name = 'lineo_admin/delete.html'
+
+
 class UserList(BaseListView):
     model = User
-    create_viewname = 'lineo-admin:user-create'
+    create_viewname = f'{app_name}:user-create'
 
     columns = ['username', 'first_name', 'last_name']
 
     actions = [
-        {'icon': 'trash', 'title': 'Delete', 'viewname': 'lineo-admin:user-delete'},
-        {'icon': 'edit', 'title': 'Edit', 'viewname': 'lineo-admin:user-update'},
+        {'icon': 'trash', 'title': 'Delete', 'viewname': f'{app_name}:user-delete'},
+        {'icon': 'edit', 'title': 'Edit', 'viewname': f'{app_name}:user-update'},
     ]
 
-
 class UserCreate(BaseCreateView):
-    access_verb = 'create_user'
+    access_verb = f'{app_name}:create_user'
     form_class = forms.UserForm
     model = User
 
-class UserUpdate(AccessMixin, FormViewMixin, generic.UpdateView):
-    access_verb = 'update_user'
+class UserUpdate(BaseUpdateView):
+    access_verb = f'{app_name}:update_user'
     form_class = forms.UserForm
     model = User
-    template_name = 'lineo_admin/edit.html'
 
-class UserDelete(AccessMixin, FormViewMixin, generic.DeleteView):
-    access_verb = 'delete_user'
+class UserDelete(BaseDeleteView):
+    access_verb = f'{app_name}:delete_user'
     model = User
-    template_name = 'lineo_admin/delete.html'
 
 class UserProfile(AccessMixin, FormViewMixin, generic.UpdateView):
-    access_verb = 'update_profile'
+    access_verb = f'{app_name}:update_profile'
     form_class = forms.UserForm
     model = User
     template_name = 'lineo_admin/edit.html'

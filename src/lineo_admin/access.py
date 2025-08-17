@@ -1,38 +1,5 @@
 from django.contrib.auth import mixins
-
-
-class Access:
-
-    @classmethod
-    def is_allowed(cls, user, verb, obj):
-        name = f'can_{verb}'
-        f = getattr(cls, name, None)
-        if f is None:
-            raise ValueError(f'Unknown access verb "{verb}')
-
-        return f(user, obj)
-
-    @classmethod
-    def can_create_user(cls, user, obj):
-        return user.is_superuser
-
-    @classmethod
-    def can_delete_user(cls, user, obj):
-        if user.is_superuser:
-            return user.id != obj.id
-
-        return False
-
-    @classmethod
-    def can_update_user(cls, user, obj):
-        return user.is_superuser
-
-    @classmethod
-    def can_update_profile(cls, user, obj):
-        return user.id == obj.id
-
-
-access = Access()
+from .registry import access
 
 
 class AccessMixin(mixins.AccessMixin):
