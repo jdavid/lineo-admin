@@ -6,6 +6,9 @@ install:
 	uv pip install -e ./packages/pages
 	npm install
 
+createsuperuser:
+	uv run python manage.py createsuperuser
+
 migrate:
 	uv run python manage.py migrate
 
