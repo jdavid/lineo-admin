@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [tool.uv.sources]
-lineo-pages = { workspace = true }
+lineo-pages = { path = "packages/pages" }
 
 [tool.uv.workspace]
 members = ["packages/*"]

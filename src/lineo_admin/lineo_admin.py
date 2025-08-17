@@ -24,5 +24,5 @@ class Access:
 
 
 def register(registry):
-    registry.sidebar.register('users', icon='user', label='Users', viewname='lineo-admin:user-list')
     registry.access.register(app_name, Access)
+    registry.sidebar.register('users', icon='user', label='Users', viewname='lineo-admin:user-list')
