@@ -15,3 +15,9 @@ run:
 
 shell:
 	uv run python manage.py shell
+
+outdated:
+	uv pip list --outdated
+
+update:
+	uv sync -U
